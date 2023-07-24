@@ -1,17 +1,17 @@
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.junit.platform.suite.api.Suite;
-import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyDouble;
+import static org.mockito.internal.verification.VerificationModeFactory.times;
 
-//@Suite
 class HorseTest {
 
     public static Horse testHorse;
@@ -22,15 +22,6 @@ class HorseTest {
         testHorse = new Horse("Mike", 20.0);
         testHorse2 = new Horse("Mike", 20.0, 45.0);
     }
-
-    @AfterAll
-    public static void shutDown() {
-//        тут все отключить
-    }
-
-//    @Mock
-//    MockedStatic<Horse> mockHorse;
-    MockedStatic<Horse> mockHorse = Mockito.mockStatic(Horse.class);
 
     @Test
     @DisplayName("Horse(), исключение: имя null")
@@ -61,7 +52,6 @@ class HorseTest {
         assertEquals("Distance cannot be negative.", exception.getMessage());
     }
 
-
     @Test
     @DisplayName("Horse.getName()")
     void getName() {
@@ -86,9 +76,17 @@ class HorseTest {
         assertEquals(45.0, testHorse2.getDistance());
     }
 
-//    @Test
-//    public void move() {
-//        Mockito.when(mockHorse).
-//        mockHorse.when(Horse::getRandomDouble).thenReturn(15);
-//    }
+    @ParameterizedTest()
+    @CsvSource({
+            "0.2, 0.9"
+    })
+    @DisplayName("Horse.move() + static getRandomDouble()")
+    public void move(double min, double max) {
+        try (MockedStatic<Horse> mockHorse = Mockito.mockStatic(Horse.class)) {
+            mockHorse.when(() -> Horse.getRandomDouble(anyDouble(), anyDouble())).thenReturn(0.5);
+            testHorse.move();
+            mockHorse.verify(() -> Horse.getRandomDouble(min, max), times(1));
+            assertEquals(10.0, testHorse.getDistance());
+        }
+    }
 }
