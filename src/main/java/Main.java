@@ -1,9 +1,13 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
+        Logger logger = LoggerFactory.getLogger(Main.class);
         List<Horse> horses = List.of(
                 new Horse("Буцефал", 2.4),
                 new Horse("Туз Пик", 2.5),
@@ -13,6 +17,7 @@ public class Main {
                 new Horse("Пегас", 2.9),
                 new Horse("Вишня", 3)
         );
+        logger.info("Начало скачек. Количество участников: {}", horses.size());
         Hippodrome hippodrome = new Hippodrome(horses);
 
         for (int i = 0; i < 100; i++) {
