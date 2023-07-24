@@ -18,6 +18,12 @@ public class Main {
                 new Horse("Вишня", 3)
         );
         logger.info("Начало скачек. Количество участников: {}", horses.size());
+
+//                SLF4J: No SLF4J providers were found.
+//                SLF4J: Defaulting to no-operation (NOP) logger implementation
+//                SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+
+
         Hippodrome hippodrome = new Hippodrome(horses);
 
         for (int i = 0; i < 100; i++) {
