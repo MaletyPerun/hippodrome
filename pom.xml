@@ -14,6 +14,8 @@
         <junit.version>5.9.2</junit.version>
         <lof4j.version>2.20.0</lof4j.version>
         <mockito.version>5.2.0</mockito.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -24,7 +26,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--                для параметризованных-->
+        <!--                для параметризованных тестов-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
@@ -55,57 +57,11 @@
             <scope>test</scope>
         </dependency>
 
-
-        <!--отдельный и простой Slf4j без остальных привязок(работает)-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.slf4j</groupId>-->
-        <!--            <artifactId>slf4j-simple</artifactId>-->
-        <!--            <version>2.0.7</version>-->
-        <!--            &lt;!&ndash;            <scope>test</scope>&ndash;&gt;-->
-        <!--        </dependency>-->
-
-        <!--        работает отдельно-->
-                <dependency>
-                    <groupId>org.apache.logging.log4j</groupId>
-                    <artifactId>log4j-slf4j-impl</artifactId>
-                    <version>${lof4j.version}</version>
-                </dependency>
-
-
-
-
-        <!--старый api и не подвязывает внутри (не работает)-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.slf4j</groupId>-->
-        <!--            <artifactId>slf4j-api</artifactId>-->
-        <!--            <version>2.0.7</version>-->
-        <!--        </dependency>-->
-
-
-        <!--        не работает-->
-<!--        <dependency>-->
-<!--            <groupId>org.slf4j</groupId>-->
-<!--            <artifactId>slf4j-log4j12</artifactId>-->
-<!--            <version>2.0.5</version>-->
-<!--        </dependency>        -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.logging.log4j</groupId>-->
-<!--            <artifactId>log4j-api</artifactId>-->
-<!--            <version>${lof4j.version}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.logging.log4j</groupId>-->
-<!--            <artifactId>log4j-core</artifactId>-->
-<!--            <version>${lof4j.version}</version>-->
-<!--        </dependency>-->
-
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-nop -->
-        <!--
-
-
-        <!- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-slf4j-impl -->
-
-
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${lof4j.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -123,5 +79,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
