@@ -5,9 +5,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
     public static void main(String[] args) throws Exception {
-        Logger logger = LoggerFactory.getLogger(Main.class);
         List<Horse> horses = List.of(
                 new Horse("Буцефал", 2.4),
                 new Horse("Туз Пик", 2.5),
@@ -17,7 +16,13 @@ public class Main {
                 new Horse("Пегас", 2.9),
                 new Horse("Вишня", 3)
         );
+        logger.trace("Начало скачек. Количество участников: {}", horses.size());
+        logger.debug("Начало скачек. Количество участников: {}", horses.size());
         logger.info("Начало скачек. Количество участников: {}", horses.size());
+        logger.warn("Начало скачек. Количество участников: {}", horses.size());
+        logger.error("Начало скачек. Количество участников: {}", horses.size());
+//        logger.fa("Начало скачек. Количество участников: {}", horses.size());
+//        logger.info("Начало скачек. Количество участников: {}", horses.size());
 
 //                SLF4J: No SLF4J providers were found.
 //                SLF4J: Defaulting to no-operation (NOP) logger implementation
@@ -29,7 +34,7 @@ public class Main {
         for (int i = 0; i < 100; i++) {
             hippodrome.move();
             watch(hippodrome);
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(1);
         }
 
         String winnerName = hippodrome.getWinner().getName();
@@ -37,9 +42,9 @@ public class Main {
     }
 
     private static void watch(Hippodrome hippodrome) throws Exception {
-        hippodrome.getHorses().stream()
-                .map(horse -> ".".repeat((int) horse.getDistance()) + horse.getName())
-                .forEach(System.out::println);
-        System.out.println("\n".repeat(10));
+//        hippodrome.getHorses().stream()
+//                .map(horse -> ".".repeat((int) horse.getDistance()) + horse.getName())
+//                .forEach(System.out::println);
+//        System.out.println("\n".repeat(10));
     }
 }
